@@ -4,9 +4,8 @@
 
 public class BSTNode<T extends Comparable<? super T>> {
     protected T el;
-    protected Student studentInfo;
+    protected Student studentInfo; //New attribute studentInfo, to have a unique identifier since names can be duplicates
     protected BSTNode<T> left, right;
-    protected int height;
     public BSTNode() {
         left = right = null;
     }

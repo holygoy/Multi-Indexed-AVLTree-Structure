@@ -9,23 +9,16 @@ public class AVLTreeID extends AVLTree<Integer> {
         }
     }
 
+    public AVLTreeID() {
+
+    }
+
     @Override
     public void breadthPrint() {
         super.breadthPrint();
     }
     @Override
-    public void deleteAVL(Integer id) {
-        super.deleteAVL(id);
-    }
-    public boolean isInTree(Integer id){
-        return super.isInTree(id);
-    }
-    @Override
-    public Student get(Integer id){
-        return super.get(id);
-    }
-    @Override
-    public void insertAVL(Integer id, Student studentInfo){
-        super.insertAVL(id, studentInfo);
+    public Student deleteAVL(Integer id) {
+        return super.deleteAVL(id);
     }
 }

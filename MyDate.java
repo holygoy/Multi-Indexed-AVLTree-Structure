@@ -9,7 +9,7 @@ public class MyDate {
 
     public MyDate(String dateString) throws IllegalArgumentException {
 
-            this.date = LocalDate.parse(dateString, FORMATTER);
+        this.date = LocalDate.parse(dateString, FORMATTER);
 
     }
 

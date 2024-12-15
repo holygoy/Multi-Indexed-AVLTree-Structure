@@ -12,46 +12,47 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
 
     public AVLTree(BSTNode<T> root) {
         super(root);
-        height = -1;
+        height = -1; //Initially the height is -1 for empty
     }
 
     public int getHeight() {
         return getHeight(root);
-    }
+    } //Getter
 
-    private int getHeight(BSTNode<T> node) {
+    private int getHeight(BSTNode<T> node) { //protected Getter for argument convenience
         if(node == null)
             return -1;
         else
             return 1 + Math.max(getHeight(node.left), getHeight(node.right));
     }
 
-    private AVLTree<T> getLeftAVL() {
+    private AVLTree<T> getLeftAVL() { //Returns left AVL Tree
         AVLTree<T> leftsubtree = new AVLTree<T>(root.left);
         return leftsubtree;
     }
 
-    private AVLTree<T> getRightAVL() {
+    private AVLTree<T> getRightAVL() { //Returns right AVL Tree
         AVLTree<T> rightsubtree = new AVLTree<T>(root.right);
         return rightsubtree;
     }
 
-    protected int getBalanceFactor() {
+    protected int getBalanceFactor() {//balance factor method for detecting inbalance
         if(isEmpty())
             return 0;
         else
             return getRightAVL().getHeight() - getLeftAVL().getHeight();
     }
 
-    public void insertAVL(T el, Student studentInfo)  {
+    public void insertAVL(T el, Student studentInfo)  { //insertAVL, a copy of the BST method but balances afterwards
         super.insert(el, studentInfo);
         this.balance();
     }
 
-    public void deleteAVL(T el) {
+    public Student deleteAVL(T el) { //the deleteAVL was modified to return the Student object of a node deleted because it contains the unique identifier; the name isn't unique so this is important
         //Q1
-        super.deleteByCopying(el); // You can use deleteByCopying if preferred
+        Student deletedStudent = super.deleteByCopying(el); //Store student when deleting
         this.balance();
+        return deletedStudent;
     }
 
 
@@ -105,7 +106,7 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
         root.el = root.right.el;
         root.studentInfo = root.right.studentInfo;
         root.right.el = val;
-        root.right.studentInfo = tempStd;
+        root.right.studentInfo = tempStd; //Whenever the key is swithced with another node, the studentInfo (ID, first & last name and date) is also switched to avoid key-studentInfo mismatch
         getRightAVL().adjustHeight();
         adjustHeight();
     }
@@ -124,12 +125,13 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
         root.el = root.left.el;
         root.studentInfo = root.left.studentInfo;
         root.left.el = val;
-        root.left.studentInfo = tempStd;
+        root.left.studentInfo = tempStd; //Whenever the key is swithced with another node, the studentInfo (ID, first & last name and date) is also switched to avoid key-studentInfo mismatch
 
         getLeftAVL().adjustHeight();
         adjustHeight();
     }
 
+    @Override
     public Student get(T el){
         return super.get(el);
     }
@@ -182,5 +184,6 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
             }
         }
     }
-    }
+}
+
 
